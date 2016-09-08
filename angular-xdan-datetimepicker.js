@@ -9,8 +9,23 @@ angular.module('XdanDatetimepicker',[])
     				});
     
     				scope.$watch(attr.ngModel, function(newValue){
-    		        	if(newValue)
-    		        		elem.datetimepicker('setOptions',{value: new Date(newValue) });
+    		        	if(newValue){
+		        		
+		        		var date = new Date(newValue);
+
+		        		if(isNaN(date.getTime())) {
+		        			var dateformatter = new DateFormatter;
+		        			try{
+		        				date = dateformatter.parseDate(newValue, attr.xdanDatetimepickerParseformat);
+		        			}catch(e) {
+		        				console.error('Unable to parse initial Date format. Please specify xdan-datetimepicker-parseformat attribute in the element inorder to parse the date correctly.');
+		        			}
+		        			
+		        		}
+
+		        		elem.datetimepicker('setOptions',{value: date })
+		        		
+		        	}
     		        });
     
     			}
