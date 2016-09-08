@@ -23,7 +23,7 @@ angular.module('XdanDatetimepicker',[])
 		        			
 		        		}
 		        		
-					if(date.getTime()){
+					if(date && date.getTime()){
 						elem.datetimepicker('setOptions',{value: date });
 					}
 		        			
